@@ -54,6 +54,10 @@ Return the article content of the web page. Return `false` if failed.
 
 Return the article title of the web page.
 
+### getImage()
+
+Return the image of the article. Return 'null' if failed.
+
 ### getHTML()
 
 Return the original html of the web page.

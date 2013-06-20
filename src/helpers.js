@@ -12,7 +12,7 @@ var regexps = {
   killBreaksRe: /(<br\s*\/?>(\s|&nbsp;?)*){1,}/g,
   videoRe: /http:\/\/(www\.)?(youtube|vimeo|youku|tudou|56|yinyuetai)\.com/i,
   bannedWebsite: /(youtube|vimeo|youku|tudou|56|yinyuetai|spotify|pic.twitter|twitpic|instagram|path|firstpersontetris|foursquare|facebook|eventbrite|meetup|mega|youtu)\.(com|be|fr|eu|co.uk|co.nz)/i,
-  bannedExtension: /\.(pdf|torrent|exe|zip|rar|png|mp3|wmv|pkg|deb|7zip|tar|gzip)/i,
+  bannedExtension: /\.(pdf|torrent|exe|zip|rar|mp3|wmv|pkg|deb|7zip|tar|gzip)/i,
   imageExtension: /\.(jpg|jpeg|gif|png)/i
 };
 
