@@ -11,7 +11,7 @@ var regexps = {
   normalizeRe: /\s{2,}/g,
   killBreaksRe: /(<br\s*\/?>(\s|&nbsp;?)*){1,}/g,
   videoRe: /http:\/\/(www\.)?(youtube|vimeo|youku|tudou|56|yinyuetai)\.com/i,
-  bannedWebsite: /(youtube|vimeo|youku|tudou|56|yinyuetai|spotify|pic.twitter|twitpic|instagram|path|firstpersontetris|foursquare|facebook|eventbrite|meetup)\.com/i,
+  bannedWebsite: /(youtube|vimeo|youku|tudou|56|yinyuetai|spotify|pic.twitter|twitpic|instagram|path|firstpersontetris|foursquare|facebook|eventbrite|meetup|mega|youtu)\.(com|be|fr|eu|co.uk|co.nz)/i,
   bannedExtension: /\.(pdf|torrent|exe|zip|rar|png|mp3|wmv|pkg|deb|7zip|tar|gzip)/i,
   imageExtension: /\.(jpg|jpeg|gif|png)/i
 };
@@ -98,7 +98,7 @@ var isBannedWebsite = module.exports.isBannedWebsite = function(url) {
 var grabImage = module.exports.grabImage = function (document) {
   var metas = document.getElementsByTagName('meta');
   for (var i = 0; i < metas.length; ++i) {
-    var url =  metas[i].content;
+    var url = metas[i].content;
     // this is an image 
     if(url && (url.search(regexps.imageExtension) != -1)) return url;
   }
