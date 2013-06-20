@@ -12,7 +12,8 @@ var regexps = {
   killBreaksRe: /(<br\s*\/?>(\s|&nbsp;?)*){1,}/g,
   videoRe: /http:\/\/(www\.)?(youtube|vimeo|youku|tudou|56|yinyuetai)\.com/i,
   bannedWebsite: /(youtube|vimeo|youku|tudou|56|yinyuetai|spotify|pic.twitter|twitpic|instagram|path|firstpersontetris|foursquare|facebook|eventbrite|meetup)\.com/i,
-  bannedExtention: /\.(jpg|jpeg|gif|pdf|torrent|exe|zip|rar|png|mp3|wmv|pkg|deb|7zip|tar|gzip)/i
+  bannedExtension: /\.(pdf|torrent|exe|zip|rar|png|mp3|wmv|pkg|deb|7zip|tar|gzip)/i,
+  imageExtension: /\.(jpg|jpeg|gif|png)/i
 };
 
 var dbg;
@@ -82,10 +83,9 @@ var prepDocument = module.exports.prepDocument = function (document) {
  **/
 var isBannedWebsite = module.exports.isBannedWebsite = function(url) {
   if (typeof url === 'undefined') return false;
-  console.log("url : " + url.search(regexps.bannedWebsite));
   if (url.search(regexps.bannedWebsite) != -1) return true;
-  console.log("Ext : " + url.search(regexps.bannedExtention));
-  if (url.search(regexps.bannedExtention) != -1) return true;
+  if (url.search(regexps.bannedExtension) != -1) return true;
+  if (url.search(regexps.imageExtension) != -1) return true;
   return false;
 }
 
@@ -99,9 +99,8 @@ var grabImage = module.exports.grabImage = function (document) {
   var metas = document.getElementsByTagName('meta');
   for (var i = 0; i < metas.length; ++i) {
     var url =  metas[i].content;
-    if(url && (url.search(".jpg") != -1 || url.search(".png") != -1 || url.search(".jepg") != -1)) {
-      return url;
-    }
+    // this is an image 
+    if(url && (url.search(regexps.imageExtension) != -1)) return url;
   }
   return 'null';
 }
