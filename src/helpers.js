@@ -11,8 +11,8 @@ var regexps = {
   normalizeRe: /\s{2,}/g,
   killBreaksRe: /(<br\s*\/?>(\s|&nbsp;?)*){1,}/g,
   videoRe: /http:\/\/(www\.)?(youtube|vimeo|youku|tudou|56|yinyuetai)\.com/i,
-  bannedWebsite: /\/(youtube|vimeo|youku|tudou|56|yinyuetai|spotify|pic.twitter|twitpic|instagram|path|firstpersontetris|foursquare|facebook|eventbrite|meetup)\.com/i,
-  bannedExtention: /.\/(jpg|jpeg|gif|pdf|torrent|exe|zip|rar|png|mp3|wmv|pkg|deb|7zip|tar|gzip)\ /i
+  bannedWebsite: /(youtube|vimeo|youku|tudou|56|yinyuetai|spotify|pic.twitter|twitpic|instagram|path|firstpersontetris|foursquare|facebook|eventbrite|meetup)\.com/i,
+  bannedExtention: /\.(jpg|jpeg|gif|pdf|torrent|exe|zip|rar|png|mp3|wmv|pkg|deb|7zip|tar|gzip)/i
 };
 
 var dbg;
@@ -82,12 +82,14 @@ var prepDocument = module.exports.prepDocument = function (document) {
  **/
 var isBannedWebsite = module.exports.isBannedWebsite = function(url) {
   if (typeof url === 'undefined') return false;
-  if (url.search(regexps.bannedWebsite)) return true;
-  if (url.search(regexps.bannedExtention)) return true;
-  else return false;
+  console.log("url : " + url.search(regexps.bannedWebsite));
+  if (url.search(regexps.bannedWebsite) != -1) return true;
+  console.log("Ext : " + url.search(regexps.bannedExtention));
+  if (url.search(regexps.bannedExtention) != -1) return true;
+  return false;
 }
 
-/**
+/** 
  * grabImage - Parsing all the meta tag to find one with an image as content
  * <meta property="og:image" content=""/>
  *

@@ -102,8 +102,8 @@ function read(html, options, callback) {
       return callback(error);
     }
 
-    if(helpers.isBannedWebsite()) {
-      callback("This website is banned!")
+    if(helpers.isBannedWebsite(meta.finalUrl)) {
+      return callback("Website/Extension banned!");
     }
 
     if (typeof body !== 'string') body = body.toString();
