@@ -33,7 +33,7 @@ var prepDocument = module.exports.prepDocument = function (document) {
     var bestFrame = null;
     var bestFrameSize = 0;
 
-    frames.forEach(function (frame) {
+   /* frames.forEach(function (frame) {
       var frameSize = frame.offsetWidth + frame.offsetHeight;
       var canAccessFrame = false;
       try {
@@ -57,7 +57,7 @@ var prepDocument = module.exports.prepDocument = function (document) {
       if (frameset) {
         frameset.parentNode.removeChild(frameset);
       }
-    }
+    }*/
   }
 
   // remove all scripts that are not readability
@@ -76,12 +76,12 @@ var prepDocument = module.exports.prepDocument = function (document) {
 }
 
 /**
- * isBannedWebsite - Using a variety of website/extention to know if the website is relevant or not
+ * isBanned - Using a variety of website/extention to know if the website is relevant or not
  *
  *
  * @return Boolean
  **/
-var isBannedWebsite = module.exports.isBannedWebsite = function(url) {
+var isBanned = module.exports.isBanned = function(url) {
   if (typeof url === 'undefined') return false;
   if (url.search(regexps.bannedWebsite) != -1) return true;
   if (url.search(regexps.bannedExtension) != -1) return true;

@@ -1,12 +1,12 @@
 {
-  "name": "node-readability",
-  "version": "0.0.8",
+  "name": "readability",
+  "version": "0.0.9",
   "author": "Zihua Li",
   "description": "Turning any web page into a clean view.",
-  "homepage": "https://github.com/luin/node-readability",
+  "homepage": "https://github.com/BaNzounet/readability",
   "repository": {
     "type": "git",
-    "url": "git://github.com/luin/node-readability.git"
+    "url": "git://github.com/BaNzounet/readability.git"
   },
   "scripts": {
     "test": "mocha -R spec"
@@ -19,7 +19,7 @@
     }
   ],
   "dependencies": {
-    "fetch": "0.3.x",
+    "request": "2.22.x",
     "jsdom": "0.6.x"
   },
   "engines": [

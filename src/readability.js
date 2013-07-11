@@ -1,5 +1,5 @@
 var jsdom = require('jsdom');
-var fetchUrl = require('fetch').fetchUrl;
+var request = require('request');
 var helpers = require('./helpers');
 
 exports.debug = function (debug) {
@@ -92,17 +92,30 @@ function read(html, options, callback) {
   }
 
   if (html.indexOf('<') === -1) {
-    fetchUrl(html, options, jsdomParse);
+    /*  
+      Move timeout outsite
+    */
+    options = {
+      url : html,
+      timeout : 5000
+    };
+    console.log('Avant Request');
+    request(options, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+      console.log('Apres Request');
+       htmlParse(null, response, body);
+      }
+      else callback(error);
+    })
   } else {
-    jsdomParse(null, null, html);
+    htmlParse(null, {finalUrl: "localhost"}, html);
   }
 
-  function jsdomParse(error, meta, body) {
+  function htmlParse(error, meta, body) {
     if (error) {
       return callback(error);
     }
-
-    if(helpers.isBannedWebsite(meta.finalUrl)) {
+    if(helpers.isBanned(meta.finalUrl)) {
       return callback("Website/Extension banned!");
     }
 
@@ -110,11 +123,12 @@ function read(html, options, callback) {
     jsdom.env({
       html: body,
       done: function (errors, window) {
-        if (errors) return callback(errors);
-        if (!window.document.body) return callback(new Error('No body tag was found.'));
-        callback(null, new Readability(window.document, options));
+         if (errors) return callback(errors);
+         if (!window.document.body) return callback(new Error('No body tag was found.'));
+         callback(null, new Readability(window.document, options),meta.finalUrl);
       }
     });
+  //  callback(null, null,meta.finalUrl);
   }
 }
 
