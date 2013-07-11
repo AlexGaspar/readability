@@ -15,7 +15,7 @@ describe('node-readability', function () {
     readability.read('http://www.whitehouse.gov/', function(err, read) {
       if (err) return done(err);
       var dom = read.getDocument();
-      read.getTitle().should.equal('The White House');
+      read.getTitle().should.equal('The White House - President Barack Obama');
       done();
     });
   });
