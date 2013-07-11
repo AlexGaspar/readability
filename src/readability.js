@@ -99,10 +99,8 @@ function read(html, options, callback) {
       url : html,
       timeout : 5000
     };
-    console.log('Avant Request');
     request(options, function (error, response, body) {
       if (!error && response.statusCode == 200) {
-      console.log('Apres Request');
        htmlParse(null, response, body);
       }
       else callback(error);
